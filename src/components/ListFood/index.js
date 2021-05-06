@@ -3,7 +3,7 @@ import { wrapperListFood } from './styles';
 import { Button, Card, Col, Row, Wrapper, textCenter, mb3 } from '../../styles';
 import ListContext from '../../contexts/WalletData';
 import Swal from 'sweetalert2';
-import { colorPrimary } from '../../color';
+import { colorPrimary, colorDanger } from '../../color';
 import { reduceVirtualMoney } from '../../api/index'
 
 const ListFood = () => {
@@ -24,7 +24,8 @@ const ListFood = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Fail',
-                text: 'Enable the wallet first before use'
+                text: 'Enable the wallet first before use',
+                confirmButtonColor: colorDanger
             })
         } else if (walletData.wallet.balance >= value) {
             Swal.fire({
@@ -64,6 +65,7 @@ const ListFood = () => {
                     Swal.fire({
                         icon: 'success',
                         title: 'Success',
+                        confirmButtonColor: `${colorPrimary}`,
                         text: 'Enjoy your food'
                     })
                 }
@@ -72,7 +74,8 @@ const ListFood = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Fail',
-                text: 'Balance must be equal to or more than the purchase price'
+                text: 'Balance must be equal to or more than the purchase price',
+                confirmButtonColor: colorDanger
             })
         }
     }

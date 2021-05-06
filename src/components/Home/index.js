@@ -126,6 +126,7 @@ const App = () => {
                     Swal.fire({
                         icon: 'success',
                         title: 'Success',
+                        confirmButtonColor: `${colorPrimary}`,
                         text: `Top up for Rp ${formatMoney(parseInt(result.value, 10), false)}`
                     })
                 }
