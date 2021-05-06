@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
 import { wrapperListTransaction, cardTransaction } from './styles';
-import { Card, Col, Row, Wrapper, textCenter, mb3 } from '../../styles';
+import { Card, Col, Row, Wrapper, textCenter, mb3, h100 } from '../../styles';
 import { formatMoney, formatDate, formatTime } from '../../helper/index';
 import ListContext from '../../contexts/WalletData';
+import ThoughtBubbleOutlineIcon from 'mdi-react/ThoughtBubbleOutlineIcon';
 
 const ListTransaction = () => {
     const { walletData } = useContext(ListContext);
  
     return (
         <>
-            <Wrapper className={wrapperListTransaction}>
-                <Row>
+            <Wrapper className={wrapperListTransaction} fillHeight>
+                <Row className={h100}>
                     {
                         walletData.deposits.map((item, index) => (
                             <Col key={index} sm="12" md="6" className={`${mb3}`}>
@@ -35,8 +36,18 @@ const ListTransaction = () => {
                             </Col>
                         ))
                     }
+                    {
+                        walletData?.deposits?.length === 0 && walletData?.withdrawal?.length === 0 &&
+                        <Wrapper className={`wrapperNotFound`}>
+                            <div className={textCenter}>
+                                <ThoughtBubbleOutlineIcon size={100} />
+                                <div>You don't have any Transaction.</div>
+                            </div>
+                        </Wrapper>
+                    }
                 </Row>
             </Wrapper>
+            
         </>
     );
 };

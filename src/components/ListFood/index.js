@@ -3,6 +3,7 @@ import { wrapperListFood } from './styles';
 import { Button, Card, Col, Row, Wrapper, textCenter, mb3 } from '../../styles';
 import ListContext from '../../contexts/WalletData';
 import Swal from 'sweetalert2';
+import { colorPrimary } from '../../color';
 import { reduceVirtualMoney } from '../../api/index'
 
 const ListFood = () => {
@@ -19,11 +20,20 @@ const ListFood = () => {
     }];
 
     const purchase = async (value) => {
-        if (walletData.wallet.balance >= value) {
+        if (walletData?.wallet?.status !== 'enabled') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Fail',
+                text: 'Enable the wallet first before use'
+            })
+        } else if (walletData.wallet.balance >= value) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Are you sure?',
                 text: 'Check again the item you want to buy.',
+                confirmButtonColor: colorPrimary,
+                confirmButtonText: 'Purchase',
+                showCancelButton: true,
                 showLoaderOnConfirm: true,
                 preConfirm: () => {
                     const param = {
@@ -49,12 +59,14 @@ const ListFood = () => {
                             }
                         })
                 }
-            }).then(() => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Enjoy your food'
-                })
+            }).then((value) => {
+                if (value.isConfirmed) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Enjoy your food'
+                    })
+                }
             })
         } else {
             Swal.fire({

@@ -22,11 +22,11 @@ const App = () => {
 	});
 
 	useEffect(() => {
-		const tempToken = (JSON.parse(localStorage.getItem('token'))) || null;
-		const username = (JSON.parse(localStorage.getItem('username'))) || null;
-		const wallet = (JSON.parse(localStorage.getItem('wallet'))) || {};
-		const deposits = (JSON.parse(localStorage.getItem('deposits'))) || [];
-		const withdrawal = (JSON.parse(localStorage.getItem('withdrawal'))) || [];
+		const tempToken = (JSON.parse(localStorage.getItem('token')));
+		const username = (JSON.parse(localStorage.getItem('username')));
+		const wallet = (JSON.parse(JSON.stringify(localStorage.getItem('wallet'))));
+		const deposits = (JSON.parse(JSON.stringify(localStorage.getItem('deposits'))) || []);
+		const withdrawal = (JSON.parse(JSON.stringify(localStorage.getItem('withdrawal'))) || []);
 		setWalletData({
 			...walletData,
 			token: tempToken,

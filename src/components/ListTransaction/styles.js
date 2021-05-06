@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { colorBorder, colorWhite, colorTextGrey } from '../../color';
+import { colorBorder, colorWhite, colorTextGrey, colorWarning } from '../../color';
 
 export const wrapperListTransaction = css`
 	background-color: ${colorWhite};
@@ -8,6 +8,15 @@ export const wrapperListTransaction = css`
 	max-height: calc(100vh - 270px);
 	overflow-y: auto;
     padding: 10px;
+
+    .wrapperNotFound {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: ${colorWarning};
+    }
 `;
 
 export const cardTransaction = css`

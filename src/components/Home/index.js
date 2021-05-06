@@ -60,12 +60,14 @@ const App = () => {
             token: null,
             username: null,
             wallet: {},
-            deposits: []
+            deposits: [],
+            withdrawal: []
         });
         localStorage.setItem('token', null);
         localStorage.setItem('username', null);
         localStorage.setItem('wallet', {});
         localStorage.setItem('deposits', []);
+        localStorage.setItem('withdrawal', []);
     }
 
     const actionWallet = () => {
