@@ -12,7 +12,7 @@ const ListTransaction = () => {
         <>
             <Wrapper className={wrapperListTransaction} fillHeight>
                 <Row className={h100}>
-                    {
+                    {console.log(walletData),
                         walletData.deposits.map((item, index) => (
                             <Col key={index} sm="12" md="6" className={`${mb3}`}>
                                 <Card className={`${textCenter} ${cardTransaction}`}>
