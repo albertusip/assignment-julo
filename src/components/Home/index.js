@@ -21,7 +21,8 @@ import {
     borderRadiusTopNone,
     borderRadiusBottomNone,
     borderBottomNone,
-    w100
+    w100,
+    alignCenter
 } from '../../styles.js';
 import Swal from 'sweetalert2';
 import HiddenText from '../HiddenText/index';
@@ -121,12 +122,12 @@ const App = () => {
                     }
                     const res = await addVirtualMoney(param)
                     if (res.status === 'success') {
-                            const tempArray = walletData.deposits !== null ? JSON.parse(walletData.deposits).slice() : [];
+                            const tempArray = walletData.deposits !== null ? walletData.deposits.slice() : [];
                             tempArray.push(res.data.deposit);
                             const newObj = { ...walletData, deposits: tempArray };
                             setWalletData(newObj);
 
-                            const tempDeposits = JSON.stringify(walletData.deposits);
+                            const tempDeposits = JSON.stringify(tempArray);
                             localStorage.setItem('deposits', tempDeposits);
                             return value;
                         }
@@ -270,7 +271,7 @@ const App = () => {
             </Switch>
 
             <Footer>
-                <Wrapper flexWrap alignHorizontal="space-around">
+                <Wrapper flexWrap className={alignCenter} alignHorizontal="space-around">
                     <NavLink exact to="/" activeClassName="selected" className="footer-menu">
                         <HomeIcon size={18} />
                         Home
