@@ -56,7 +56,7 @@ const ListFood = () => {
                                 const newObj = { ...walletData, withdrawal: tempArray };
                                 setWalletData(newObj);
 
-                                const tempWithdrawal = JSON.stringify(tempArray);
+                                const tempWithdrawal = JSON.stringify(walletData.withdrawal);
                                 localStorage.setItem('withdrawal', tempWithdrawal);
                             }
                         })

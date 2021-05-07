@@ -115,7 +115,7 @@ const App = () => {
                                 const newObj = { ...walletData, deposits: tempArray };
                                 setWalletData(newObj);
 
-                                const tempDeposits = JSON.stringify(tempArray);
+                                const tempDeposits = JSON.stringify(walletData.deposits);
                                 localStorage.setItem('deposits', tempDeposits);
                                 return value;
                             }
