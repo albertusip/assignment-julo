@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
     LabelWarning,
     Card,
@@ -48,6 +48,23 @@ const App = () => {
     const { walletData, setWalletData } = useContext(ListContext);
     const [ loadingActionWalletButton, setLoadingActionWalletButton ] = useState(false);
     const [ refreshWallet, setRefreshWallet ] = useState(false);
+
+    useEffect(() => {
+        const tempToken = JSON.parse(localStorage.getItem('token'));
+        const username = JSON.parse(localStorage.getItem('username'));
+        const wallet = JSON.parse(localStorage.getItem('wallet'));
+        const deposits = JSON.parse(localStorage.getItem('deposits')); console.log('de', deposits)
+        const withdrawal = JSON.parse(localStorage.getItem('withdrawal'));
+        setWalletData({
+            ...walletData,
+            token: tempToken,
+            username: username,
+            wallet: wallet,
+            deposits: deposits,
+            withdrawal: withdrawal
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const signOut = async () => {
         await resetData();
