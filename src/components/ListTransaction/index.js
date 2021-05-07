@@ -13,7 +13,7 @@ const ListTransaction = () => {
             <Wrapper className={wrapperListTransaction} fillHeight>
                 <Row className={h100}>
                     {
-                        walletData.deposits.map((item, index) => (
+                        walletData.deposits !== null && walletData.deposits.map((item, index) => (
                             <Col key={index} sm="12" md="6" className={`${mb3}`}>
                                 <Card className={`${textCenter} ${cardTransaction}`}>
                                     <div className={`${mb3} title`}>Deposit</div>
@@ -25,7 +25,7 @@ const ListTransaction = () => {
                         ))
                     }
                     {
-                        walletData.withdrawal.map((item, index) => (
+                        walletData.withdrawal !== null && walletData.withdrawal.map((item, index) => (
                             <Col key={index} sm="12" md="6" className={`${mb3}`}>
                                 <Card className={`${textCenter} ${cardTransaction}`}>
                                     <div className={`${mb3} title`}>Withdrawal</div>
