@@ -50,13 +50,13 @@ const ListFood = () => {
                                 )
                             }
                             else if (response.status === 'success') {
-                                console.log(walletData);
-                                let tempArray = walletData.withdrawal !== null ? walletData.withdrawal.slice() : [];
-                                tempArray.push(response.data.withdrawal);
+                                
+                                let tempArray = (walletData.withdrawal !== null || walletData?.withdrawal?.length === 0) ? walletData.withdrawal.slice() : [];
+                                tempArray = [...tempArray, response.data.withdrawal]
                                 const newObj = { ...walletData, withdrawal: tempArray };
                                 setWalletData(newObj);
 
-                                const tempWithdrawal = JSON.stringify(walletData.withdrawal);
+                                const tempWithdrawal = JSON.stringify(tempArray);
                                 localStorage.setItem('withdrawal', tempWithdrawal);
                             }
                         })

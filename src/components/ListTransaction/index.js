@@ -13,7 +13,7 @@ const ListTransaction = () => {
             <Wrapper className={wrapperListTransaction} fillHeight>
                 <Row>
                     {
-                        walletData.deposits !== null && walletData.deposits.map((item, index) => (
+                        walletData.deposits !== null ? walletData.deposits.map((item, index) => (
                             <Col key={index} sm="12" md="6" className={`${mb3}`}>
                                 <Card className={`${textCenter} ${cardTransaction}`}>
                                     <div className={`${mb3} title`}>Deposit</div>
@@ -22,10 +22,10 @@ const ListTransaction = () => {
                                     <div className={`${mb3} time`}>{formatTime(item.deposited_at)} WIB</div>
                                 </Card>
                             </Col>
-                        ))
+                        )) : null
                     }
                     {
-                        walletData.withdrawal !== null && walletData.withdrawal.map((item, index) => (
+                        walletData.withdrawal !== null ? walletData.withdrawal.map((item, index) => (
                             <Col key={index} sm="12" md="6" className={`${mb3}`}>
                                 <Card className={`${textCenter} ${cardTransaction}`}>
                                     <div className={`${mb3} title`}>Withdrawal</div>
@@ -34,16 +34,16 @@ const ListTransaction = () => {
                                     <div className={`${mb3} time`}>{formatTime(item.withdrawn_at)} WIB</div>
                                 </Card>
                             </Col>
-                        ))
+                        )) : null
                     }
                     {
-                        walletData?.deposits?.length === 0 && walletData?.withdrawal?.length === 0 &&
+                        (walletData?.deposits === null || walletData?.deposits?.length === 0) && (walletData?.withdrawal === null || walletData?.withdrawal?.length === 0) ?
                         <Wrapper className={`wrapperNotFound`}>
                             <div className={textCenter}>
                                 <ThoughtBubbleOutlineIcon size={100} />
                                 <div>You don't have any Transaction.</div>
                             </div>
-                        </Wrapper>
+                        </Wrapper> : null
                     }
                 </Row>
             </Wrapper>

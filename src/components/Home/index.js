@@ -122,15 +122,16 @@ const App = () => {
                     }
                     const res = await addVirtualMoney(param)
                     if (res.status === 'success') {
-                            const tempArray = walletData.deposits !== null ? walletData.deposits.slice() : [];
-                            tempArray.push(res.data.deposit);
-                            const newObj = { ...walletData, deposits: tempArray };
-                            setWalletData(newObj);
+                        let tempArray = (walletData.deposits !== null || walletData?.deposits?.length === 0) ? walletData.deposits.slice() : [];
 
-                            const tempDeposits = JSON.stringify(tempArray);
-                            localStorage.setItem('deposits', tempDeposits);
-                            return value;
-                        }
+                        tempArray = [...tempArray, res.data.deposit]
+                        const newObj = { ...walletData, deposits: tempArray };
+                        setWalletData(newObj);
+
+                        const tempDeposits = JSON.stringify(tempArray);
+                        localStorage.setItem('deposits', tempDeposits);
+                        return value;
+                    }
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
