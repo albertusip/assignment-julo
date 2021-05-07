@@ -19,7 +19,7 @@ const ListFood = () => {
         price: 15000
     }];
 
-    const purchase = async (value) => {console.log(walletData);
+    const purchase = async (value) => {
         if (walletData?.wallet?.status !== 'enabled') {
             Swal.fire({
                 icon: 'error',
