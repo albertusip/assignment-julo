@@ -51,7 +51,7 @@ const ListFood = () => {
                             }
                             else if (response.status === 'success') {
                                 console.log(walletData);
-                                const tempArray = walletData.withdrawal.length ? walletData.withdrawal.slice() : [];
+                                const tempArray = walletData.withdrawal !== null ? walletData.withdrawal.slice() : [];
                                 tempArray.push(response.data.withdrawal);
                                 const newObj = { ...walletData, withdrawal: tempArray };
                                 setWalletData(newObj);

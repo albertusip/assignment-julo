@@ -25,8 +25,8 @@ const App = () => {
 		const tempToken = JSON.parse(localStorage.getItem('token'));
 		const username = JSON.parse(localStorage.getItem('username'));
 		const wallet = JSON.parse(localStorage.getItem('wallet'));
-		const deposits = JSON.parse(localStorage.getItem('deposits')) || [];
-		const withdrawal = JSON.parse(localStorage.getItem('withdrawal')) || [];
+		const deposits = JSON.parse(localStorage.getItem('deposits')); console.log('de',deposits)
+		const withdrawal = JSON.parse(localStorage.getItem('withdrawal'));
 		setWalletData({
 			...walletData,
 			token: tempToken,
