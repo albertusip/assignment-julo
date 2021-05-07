@@ -65,9 +65,9 @@ const App = () => {
         });
         localStorage.setItem('token', null);
         localStorage.setItem('username', null);
-        localStorage.setItem('wallet', {});
-        localStorage.setItem('deposits', []);
-        localStorage.setItem('withdrawal', []);
+        localStorage.setItem('wallet', JSON.stringify({}));
+        localStorage.setItem('deposits', JSON.stringify([]));
+        localStorage.setItem('withdrawal', JSON.stringify([]));
     }
 
     const actionWallet = () => {
