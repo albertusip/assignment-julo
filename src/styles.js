@@ -462,7 +462,7 @@ export const Footer = styled.div`
 export const Wrapper = styled.div`
 	padding-right: 15px;
 	padding-left: 15px;
-    height: ${props => props.fillHeight && '100vh'};
+    height: 100%;
 	margin-right: auto;
 	margin-left: auto;
     min-width: ${props => props.minWidth && `${props.minWidth}px`};

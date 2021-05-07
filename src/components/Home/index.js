@@ -21,7 +21,8 @@ import {
     borderRadiusTopNone,
     borderRadiusBottomNone,
     borderBottomNone,
-    w100
+    w100,
+    alignCenter
 } from '../../styles.js';
 import Swal from 'sweetalert2';
 import HiddenText from '../HiddenText/index';
@@ -65,9 +66,9 @@ const App = () => {
         });
         localStorage.setItem('token', null);
         localStorage.setItem('username', null);
-        localStorage.setItem('wallet', {});
-        localStorage.setItem('deposits', []);
-        localStorage.setItem('withdrawal', []);
+        localStorage.setItem('wallet', JSON.stringify({}));
+        localStorage.setItem('deposits', JSON.stringify([]));
+        localStorage.setItem('withdrawal', JSON.stringify([]));
     }
 
     const actionWallet = () => {
@@ -97,29 +98,23 @@ const App = () => {
                     }
                 },
                 showLoaderOnConfirm: true,
-                preConfirm: (value) => {
+                preConfirm: async (value) => {
                     const param = {
                         amount: parseInt(value),
                         referenceId: `${Math.floor(Math.random() * 100) + 1}-${Math.floor(Math.random() * 100) + 1}-${Math.floor(Math.random() * 100) + 1}-${Math.floor(Math.random() * 100) + 1}`
                     }
-                    return addVirtualMoney(param)
-                        .then(response => {
-                            if (response.status !== 'success') {
-                                Swal.showValidationMessage(
-                                    'Request failed: please contact Admin'
-                                )
-                            }
-                            else if (response.status === 'success') {
-                                const tempArray = walletData.deposits.slice();
-                                tempArray.push(response.data.deposit);
-                                const newObj = { ...walletData, deposits: tempArray };
-                                setWalletData(newObj);
+                    const res = await addVirtualMoney(param)
+                    if (res.status === 'success') {
+                        let tempArray = (walletData.deposits !== null || walletData?.deposits?.length === 0) ? walletData.deposits.slice() : [];
 
-                                const tempDeposits = JSON.stringify(tempArray);
-                                localStorage.setItem('deposits', tempDeposits);
-                                return value;
-                            }
-                        })
+                        tempArray = [...tempArray, res.data.deposit]
+                        const newObj = { ...walletData, deposits: tempArray };
+                        setWalletData(newObj);
+
+                        const tempDeposits = JSON.stringify(tempArray);
+                        localStorage.setItem('deposits', tempDeposits);
+                        return value;
+                    }
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -260,7 +255,7 @@ const App = () => {
             </Switch>
 
             <Footer>
-                <Wrapper flexWrap alignHorizontal="space-around">
+                <Wrapper flexWrap className={alignCenter} alignHorizontal="space-around">
                     <NavLink exact to="/" activeClassName="selected" className="footer-menu">
                         <HomeIcon size={18} />
                         Home
