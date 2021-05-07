@@ -104,7 +104,7 @@ const App = () => {
                     }
                     const res = await addVirtualMoney(param)
                     if (res.status === 'success') {
-                            const tempArray = walletData.deposits.slice();
+                            const tempArray = JSON.parse(walletData.deposits).slice();
                             tempArray.push(res.data.deposit);
                             const newObj = { ...walletData, deposits: tempArray };
                             setWalletData(newObj);
