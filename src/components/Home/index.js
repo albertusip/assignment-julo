@@ -97,29 +97,22 @@ const App = () => {
                     }
                 },
                 showLoaderOnConfirm: true,
-                preConfirm: (value) => {
+                preConfirm: async (value) => {
                     const param = {
                         amount: parseInt(value),
                         referenceId: `${Math.floor(Math.random() * 100) + 1}-${Math.floor(Math.random() * 100) + 1}-${Math.floor(Math.random() * 100) + 1}-${Math.floor(Math.random() * 100) + 1}`
                     }
-                    return addVirtualMoney(param)
-                        .then(response => {
-                            if (response.status !== 'success') {
-                                Swal.showValidationMessage(
-                                    'Request failed: please contact Admin'
-                                )
-                            }
-                            else if (response.status === 'success') {
-                                const tempArray = walletData.deposits.slice();
-                                tempArray.push(response.data.deposit);
-                                const newObj = { ...walletData, deposits: tempArray };
-                                setWalletData(newObj);
+                    const res = await addVirtualMoney(param)
+                    if (res.status === 'success') {
+                            const tempArray = walletData.deposits.slice();
+                            tempArray.push(res.data.deposit);
+                            const newObj = { ...walletData, deposits: tempArray };
+                            setWalletData(newObj);
 
-                                const tempDeposits = JSON.stringify(walletData.deposits);
-                                localStorage.setItem('deposits', tempDeposits);
-                                return value;
-                            }
-                        })
+                            const tempDeposits = JSON.stringify(walletData.deposits);
+                            localStorage.setItem('deposits', tempDeposits);
+                            return value;
+                        }
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
